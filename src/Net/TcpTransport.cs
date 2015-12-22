@@ -386,7 +386,7 @@ namespace Amqp
 
             Task<int> IAsyncTransport.ReceiveAsync(byte[] buffer, int offset, int count)
             {
-                return this.sslStream.ReadAsync(buffer, offset, count);
+                return Task.Run( () => this.sslStream.Read( buffer, offset, count ) );
             }
 
             void ITransport.Send(ByteBuffer buffer)
